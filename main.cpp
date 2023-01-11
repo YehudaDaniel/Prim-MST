@@ -12,15 +12,15 @@ void print_mat(Mat& mat) {
     printf("    ");
 
     for (size_t i = 0; i < mat.size(); i++)
-        printf("%3ld ", i+1);
+        printf("%3ld ", i + 1);
 
     printf("\n    ");
     for (size_t i = 0; i < mat.size(); i++)
         printf("----");
     printf("\n");
-    
+
     for (size_t i = 0; i < mat.size(); i++) {
-        printf("%2ld| ", i+1);
+        printf("%2ld| ", i + 1);
         for (size_t j = 0; j < mat.size(); j++) {
             if (mat[i][j] == INT_MAX)
                 std::cout << "INF ";
@@ -36,12 +36,9 @@ int weight_func(Mat& mat, int i, int j) {
     return mat[i][j];
 }
 
-int main(){
-    // Mat graph = {
-    //     {INT_MAX, 4, 20, 6, 11, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX },
-    //     {4, INT_MAX, 20, 6, 11, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX }
-    // };
+int main() {
     std::map<int, std::vector<edge>> adj_list;
+
     adj_list[1] = { {2, 5}, {3, 11}, {4, 13}, {5, 20} };
     adj_list[2] = { {4, 7}, {5, 20}, {8, 6} };
     adj_list[3] = { {4, 90}, {6, 7}, {7, 1}, {20, 15} };
@@ -63,9 +60,16 @@ int main(){
     adj_list[19] = { };
     adj_list[20] = { };
 
+    /*
+    adj_list[1] = { {2,8},{3,3},{4,7} };
+    adj_list[2] = { {4,6},{5,10} };
+    adj_list[3] = { {5,5} };
+    adj_list[4] = { };
+    adj_list[5] = { };    
+    */
     Mat graph = std::vector<std::vector<int>>(20, std::vector<int>(20, INT_MAX));
-    for (auto &&edges : adj_list) {
-        for (auto &&edge : edges.second) {
+    for (auto&& edges : adj_list) {
+        for (auto&& edge : edges.second) {
             graph[edges.first - 1][edge.to - 1] = edge.weight;
         }
     }
@@ -83,6 +87,8 @@ int main(){
     print_mat(mst);
 
     int from = 17, to = 20, weight = 2000001;
+    //int from = 2, to = 1, weight = 2000001;
+    
     std::cout << "Adding edge from " << from << " to " << to << " with weight " << weight << "\n";
     std::cout << "New MST (unchanged)\n";
     Prim::addEdge(mst, from - 1, to - 1, weight);

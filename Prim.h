@@ -12,11 +12,11 @@ struct node {
 
 typedef std::vector<std::vector<int>> Mat;
 
-typedef int (*WeightFunc)(Mat&, int,int);
+typedef int (*WeightFunc)(Mat&, int, int);
 
-class Prim{
+class Prim {
 private:
-    static bool getCycle(Mat& graph, int start, int current, std::vector<int>& nodes, std::map<int, bool>& visited);
+    static bool getCycle(Mat& graph, int start, int current, std::vector<int>& nodes, std::map<int, bool>& visited, int depth);
     static std::vector<int> getCycle(Mat& graph, int start);
 
 public:
@@ -25,4 +25,4 @@ public:
     static void addEdge(Mat& graph, int i, int j, int weight);
 };
 
-#endif
+#endif#pragma once
